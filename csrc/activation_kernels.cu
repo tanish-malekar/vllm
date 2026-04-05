@@ -569,9 +569,9 @@ __device__ __forceinline__ T gelu_quick_kernel(const T& x) {
 template <typename T>
 __device__ __forceinline__ T relu_squared_kernel(const T& x) {
   // relu(x)^2 — introduced in https://arxiv.org/abs/2109.08668v2
-  const T zero = T(0);
-  const T val = x > zero ? x : zero;
-  return val * val;
+  const float f = (float)x;
+  const float val = f > 0.0f ? f : 0.0f;
+  return (T)(val * val);
 }
 
 }  // namespace vllm
